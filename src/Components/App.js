@@ -1,49 +1,50 @@
 import React, { useState, useEffect } from 'react'
+import Header from './Boilerplates/Header';
+import { fetchPokemonData, fetchPokemonResults } from '../Utils/Api-Calls'
+import Pokemons from './Pokemons';
+import uniqid from 'uniqid';
 
 function App() {
-
   const [pokemons, setPokemons] = useState([]);
   const [selected, setSelected] = useState([]);
-  const [count, setCount] = useState(0);
-
-  const fetchPokemonResults = async (pokemon) => {
-    let url = pokemon.url;
-    const response = await fetch(url);
-    return response.json();
-  }
-
-  const fetchPokemonData = async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10');
-    return response.json();
-  }
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
 
   useEffect(() => {
     fetchPokemonData()
     .then(pokemons => pokemons.results.forEach(pokemon => {
       fetchPokemonResults(pokemon)
       .then(pokemon => setPokemons(prevPokemons => {
-        return([
-          ...prevPokemons,
-          pokemon.name
-        ]);
+        let name = pokemon.name;
+        let img = pokemon.sprites.front_default;
+        return([...prevPokemons,
+          {
+            key: uniqid(),
+            name,
+            img,
+        }]);
       }));
     }));
   },[]);
 
-  const addCount = () => {
-    setCount(prevCount => prevCount + 1);
+  useEffect(() => {
+    setBestScore(prevBestScore => prevBestScore = score)
+  },[score])
+
+  const addScore = () => {
+    setScore(prevScore => prevScore + 1);
   }
 
-  const resetCount = () => {
-    setCount(prevCount => prevCount = 0)
+  const resetScore = () => {
+    setScore(prevScore => prevScore = 0);
   }
 
   const addSelected = (e) => {
-    const { textContent } = e.target;
+    const { pokemon } = e.target.dataset;
     setSelected(prevSelected => {
       return([
         ...prevSelected,
-        textContent
+        pokemon,
       ]);
     });
   }
@@ -56,53 +57,42 @@ function App() {
     const { textContent } = e.target;
     const result = selected.filter(item => item === textContent);
     if (result.length === 1) {
-      resetCount();
+      resetScore();
       resetSelected();
     }
   }
 
   const shufflePokemons = (pokemons) => {
-    let currentIndex = pokemons.length, randomIndex;
+    let currentIndex = pokemons.length;
     
     while(currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
+      let randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
       [pokemons[currentIndex], pokemons[randomIndex]] = [
         pokemons[randomIndex], pokemons[currentIndex]
       ];
     }
-
     return pokemons;
   }
 
   const onClick = (e) => {
-    addCount();
     addSelected(e);
+    addScore();
     checkSelected(e);
     shufflePokemons(pokemons);
   }
   
   return (
     <div className="App">
-      <h1>Count: {count}</h1>
-      {
-        pokemons.map(pokemon => {
-          return(
-            <div>
-              <p onClick={onClick}>{pokemon}</p>
-            </div>
-          );
-        })
-      }
-      <h1>Selected:</h1>
-      {
-        selected.map(item => {
-          return( 
-            <p>{item}</p>
-          )
-        })
-      }
+      <Header 
+        score={score}
+        bestScore={bestScore}
+        />
+      <Pokemons 
+        pokemons={pokemons}
+        select={onClick}
+      />
     </div>
   );
 }
