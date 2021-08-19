@@ -3,6 +3,7 @@ import Header from './Boilerplates/Header';
 import { fetchPokemonData, fetchPokemonResults } from '../Utils/Api-Calls'
 import Pokemons from './Pokemons';
 import uniqid from 'uniqid';
+import Instruction from './Boilerplates/Instruction';
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
@@ -28,8 +29,8 @@ function App() {
   },[]);
 
   useEffect(() => {
-    setBestScore(prevBestScore => prevBestScore = score)
-  },[score])
+    if (score > bestScore) setBestScore(prevBestScore => prevBestScore + 1)
+  },[score, bestScore])
 
   const addScore = () => {
     setScore(prevScore => prevScore + 1);
@@ -93,6 +94,7 @@ function App() {
         pokemons={pokemons}
         select={onClick}
       />
+      <Instruction />
     </div>
   );
 }
