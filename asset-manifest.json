@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/28Goo/Memory-Card-Game.git/static/css/main.c4c9d724.chunk.css",
+    "main.js": "/28Goo/Memory-Card-Game.git/static/js/main.bb14b7da.chunk.js",
+    "main.js.map": "/28Goo/Memory-Card-Game.git/static/js/main.bb14b7da.chunk.js.map",
+    "runtime-main.js": "/28Goo/Memory-Card-Game.git/static/js/runtime-main.28ce120e.js",
+    "runtime-main.js.map": "/28Goo/Memory-Card-Game.git/static/js/runtime-main.28ce120e.js.map",
+    "static/js/2.9535f03b.chunk.js": "/28Goo/Memory-Card-Game.git/static/js/2.9535f03b.chunk.js",
+    "static/js/2.9535f03b.chunk.js.map": "/28Goo/Memory-Card-Game.git/static/js/2.9535f03b.chunk.js.map",
+    "index.html": "/28Goo/Memory-Card-Game.git/index.html",
+    "static/css/main.c4c9d724.chunk.css.map": "/28Goo/Memory-Card-Game.git/static/css/main.c4c9d724.chunk.css.map",
+    "static/js/2.9535f03b.chunk.js.LICENSE.txt": "/28Goo/Memory-Card-Game.git/static/js/2.9535f03b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.28ce120e.js",
+    "static/js/2.9535f03b.chunk.js",
+    "static/css/main.c4c9d724.chunk.css",
+    "static/js/main.bb14b7da.chunk.js"
+  ]
+}
