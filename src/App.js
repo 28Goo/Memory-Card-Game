@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import Header from './Boilerplates/Header';
-import { fetchPokemonData, fetchPokemonResults } from '../Utils/Api-Calls'
-import Pokemons from './Pokemons';
+import Header from './Components/Boilerplates/Header';
+import { fetchPokemonData, fetchPokemonResults } from './Utils/Api-Calls'
+import Pokemons from './Components/Pokemons';
 import uniqid from 'uniqid';
-import Instruction from './Boilerplates/Instruction';
+import Instruction from './Components/Boilerplates/Instruction';
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
