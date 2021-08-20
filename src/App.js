@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import Header from './Components/Boilerplates/Header';
 import { fetchPokemonData, fetchPokemonResults } from './Utils/Api-Calls'
+import Header from './Components/Boilerplates/Header';
 import Pokemons from './Components/Pokemons';
+import capitalizeFirstLetter from './Utils/Misc-Functions'
 import uniqid from 'uniqid';
 import Instruction from './Components/Boilerplates/Instruction';
 
@@ -16,7 +17,7 @@ function App() {
     .then(pokemons => pokemons.results.forEach(pokemon => {
       fetchPokemonResults(pokemon)
       .then(pokemon => setPokemons(prevPokemons => {
-        let name = pokemon.name;
+        let name = capitalizeFirstLetter(pokemon.name);
         let img = pokemon.sprites.front_default;
         return([...prevPokemons,
           {
@@ -30,7 +31,8 @@ function App() {
 
   useEffect(() => {
     if (score > bestScore) setBestScore(prevBestScore => prevBestScore + 1)
-  },[score, bestScore])
+    console.log(selected);
+  },[score, bestScore, selected])
 
   const addScore = () => {
     setScore(prevScore => prevScore + 1);
