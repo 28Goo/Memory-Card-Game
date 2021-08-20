@@ -31,7 +31,6 @@ function App() {
 
   useEffect(() => {
     if (score > bestScore) setBestScore(prevBestScore => prevBestScore + 1)
-    console.log(selected);
   },[score, bestScore, selected])
 
   const addScore = () => {
